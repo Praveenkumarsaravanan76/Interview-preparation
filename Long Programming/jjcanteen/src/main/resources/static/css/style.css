@@ -1,0 +1,108 @@
+body {
+    font-family: Arial;
+    margin: 0;
+    background: #fff8f0;
+}
+
+/* Header */
+header {
+    background: linear-gradient(45deg, rgb(255 106 0 / 0.82), #ff9900);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* Buttons */
+button {
+    background: #ff6a00;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #e65c00;
+}
+
+/* Cards */
+.card {
+    background: white;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+}
+/* Order Cards */
+.order-card {
+    padding: 15px;
+    margin: 12px;
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+    transition: transform 0.2s;
+}
+
+.order-card:hover {
+    transform: scale(1.02);
+}
+
+/* Status Colors */
+.ordered {
+    background: linear-gradient(45deg, #ff9800, #ff6a00);
+}
+
+.ready {
+    background: linear-gradient(45deg, #28a745, #4caf50);
+}
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(45deg, #ff6a00, rgb(255 196 0));
+    color: white;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Features */
+.features {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px;
+}
+
+/* Categories */
+.categories {
+    text-align: center;
+    padding: 40px;
+}
+
+.category-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Footer */
+footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}

@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header>Admin Panel</header>
+
+<div style="text-align:center;">
+    <input id="name" placeholder="Food name">
+    <input id="category" placeholder="Category">
+    <input id="price" placeholder="Price">
+
+    <button onclick="addFood()">Add Food</button>
+</div>
+<h2>Orders</h2>
+<div id="adminOrders"></div>
+
+<script>
+    function loadAdminOrders() {
+        fetch('/student/orders')
+            .then(res => res.json())
+            .then(data => {
+                let html = "";
+                data.forEach(o => {
+                    html += `<div class="card">
+                <h3>${o.foodName}</h3>
+                <p>${o.status}</p>
+                <button onclick="markReady(${o.id})">Mark Ready</button>
+            </div>`;
+                });
+                document.getElementById("adminOrders").innerHTML = html;
+            });
+    }
+
+    function markReady(id) {
+        fetch('/admin/ready/' + id, {method: 'PUT'})
+            .then(() => loadAdminOrders());
+    }
+
+    setInterval(loadAdminOrders, 3000);
+</script>
+
+<script>
+    function addFood() {
+        fetch('/admin/add-food', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                name: document.getElementById("name").value,
+                category: document.getElementById("category").value,
+                price: document.getElementById("price").value
+            })
+        }).then(() => alert("✅ Food Added"));
+    }
+</script>
+
+</body>
+</html>

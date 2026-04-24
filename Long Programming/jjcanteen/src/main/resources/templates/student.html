@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header>Student Dashboard</header>
+
+<div style="text-align:center;">
+    <button onclick="load('foods')">Foods</button>
+    <button onclick="load('snacks')">Snacks</button>
+    <button onclick="load('stationery')">Stationery</button>
+    <button onclick="load('juices')">Juices</button>
+</div>
+<h2>Your Orders</h2>
+<div id="orders"></div>
+
+<div id="items"></div>
+
+<script>
+    function load(category) {
+        fetch('/student/foods/' + category)
+            .then(res => res.json())
+            .then(data => {
+                let html = "";
+                data.forEach(f => {
+                    html += `<div class="card">
+                <h3>${f.name}</h3>
+                <p>₹${f.price}</p>
+                <button onclick="order('${f.name}')">Order</button>
+            </div>`;
+                });
+                document.getElementById("items").innerHTML = html;
+            });
+    }
+
+    function order(name) {
+        fetch('/student/order?foodName=' + name, {method: 'POST'})
+            .then(() => alert("✅ Pick within 10 mins"));
+    }
+</script>
+<script>
+    function loadOrders() {
+        fetch('/student/orders')
+            .then(res => res.json())
+            .then(data => {
+                let html = "";
+                data.forEach(o => {
+                    let color = o.status === "READY" ? "green" : "orange";
+
+                    html += `<div class="card">
+                <h3>${o.foodName}</h3>
+                <p style="color:${color}; font-weight:bold;">
+                    ${o.status}
+                </p>
+            </div>`;
+                });
+                document.getElementById("orders").innerHTML = html;
+            });
+    }
+
+    // auto refresh every 3 sec
+    setInterval(loadOrders, 3000);
+</script>
+
+</body>
+</html>
